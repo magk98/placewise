@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {fromEvent, Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { of } from 'rxjs';
-import {CampaignList} from './campaign-list';
 
 import data from './campaigns-data.json';
 import {Campaign} from './campaign';
@@ -13,16 +12,16 @@ import {startWith, switchMap} from 'rxjs/operators';
 })
 export class CampaignService {
   filterComponent: CampaignFilterComponent;
-  campaignList: Observable<Campaign[]>;
+  campaignListObservable: Observable<Campaign[]>;
 
   constructor() { }
 
   getCampaignList(): Observable<Campaign[]>{
-    this.campaignList = this.filterComponent.filterForm.valueChanges.pipe(
+    this.campaignListObservable = this.filterComponent.CampaignForm.valueChanges.pipe(
       startWith(of(data.campaigns)),
       switchMap(() => of(data.campaigns))
     );
-    return this.campaignList;
+    return this.campaignListObservable;
   }
 
   getFilteredCampaignList(): Observable<Campaign[]>{

@@ -1,4 +1,16 @@
-<label>
-  Name:
-  <input type="text" [formControl]="filterForm">
-</label>
+<form [formGroup]="CampaignForm">
+  <label>
+    Name:
+    <input type="text" formControlName="nameFilter">
+  </label>
+
+  <label>
+    Start date:
+    <input type="date" formControlName="startDateFilter">
+  </label>
+
+  <label>
+    End date:
+    <input type="date" formControlName="endDateFilter">
+  </label>
+</form>
