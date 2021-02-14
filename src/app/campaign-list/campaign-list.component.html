@@ -1,3 +1,5 @@
 <div *ngFor="let c of campaignList">
-  {{c.id}} {{c.name}} {{c.start}} {{c.end}}
+  <span class="d-none d-sm-inline"> {{c.id}} </span>
+  {{c.name}}
+  <span class="d-block d-sm-inline">{{c.start}} {{c.end}} </span>
 </div>
