@@ -1,5 +1,13 @@
-<div *ngFor="let c of campaignList">
-  <span class="d-none d-sm-inline"> {{c.id}} </span>
+<div *ngFor="let c of campaignList" class="campaign-list-item">
+
+  <span id="campaign-id">
+    {{c.id}}
+  </span>
+
   {{c.name}}
-  <span class="d-block d-sm-inline">{{c.start}} {{c.end}} </span>
+
+  <span class="campaign-date-period">
+    {{c.start}} {{c.end}}
+  </span>
+
 </div>

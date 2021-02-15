@@ -8,7 +8,7 @@ import { Campaign } from '../campaign';
 @Component({
   selector: 'app-campaign-filter',
   templateUrl: './campaign-filter.component.html',
-  styleUrls: ['./campaign-filter.component.css']
+  styleUrls: ['./campaign-filter.component.css', './../campaign-list/campaign-list.component.css']
 })
 export class CampaignFilterComponent implements OnInit {
   CampaignForm: FormGroup = new FormGroup({
@@ -36,8 +36,8 @@ export class CampaignFilterComponent implements OnInit {
   }
 
   filterCampaignDates(campaigns: Campaign[]): Campaign[]{
-    if (this._areDatesPresent()){
-      return campaigns.filter(campaign => this._compareDatesrange(campaign));
+    if (this._areDatesValuesPresent()){
+      return campaigns.filter(campaign => this._compareDatesRange(campaign));
     }
     return campaigns;
   }
@@ -45,21 +45,21 @@ export class CampaignFilterComponent implements OnInit {
   filterCampaignNames(campaigns: Campaign[]): Campaign[]{
     const nameFormValue = this.CampaignForm.get('nameFilter').value;
 
-    return campaigns.filter(camp => camp.name.toLowerCase().startsWith(nameFormValue.toLowerCase()));
+    return campaigns.filter(camp => camp.name.toLowerCase().includes(nameFormValue.toLowerCase()));
   }
 
-  private _areDatesPresent(): boolean{
+  private _areDatesValuesPresent(): boolean{
     const startDateFormValue = this.CampaignForm.get('startDateFilter').value;
     const endDateFormValue = this.CampaignForm.get('endDateFilter').value;
 
     return startDateFormValue !== '' && endDateFormValue !== '';
   }
 
-  private _compareDatesrange(campaign: Campaign): boolean{
-    const startDateFormValue = this.CampaignForm.get('startDateFilter').value;
-    const endDateFormValue = this.CampaignForm.get('endDateFilter').value;
+  private _compareDatesRange(campaign: Campaign): boolean{
+    const startDate = new Date(this.CampaignForm.get('startDateFilter').value);
+    const endDate = new Date(this.CampaignForm.get('endDateFilter').value);
 
-    return new Date(campaign.start) >= new Date(startDateFormValue) && new Date(campaign.end) <= new Date(endDateFormValue);
+    return new Date(campaign.start) >= new Date(startDate) && new Date(campaign.end) <= new Date(endDate);
   }
 
 }

@@ -1,16 +1,20 @@
 <form [formGroup]="CampaignForm">
+
   <label>
     Name:
     <input type="text" formControlName="nameFilter">
   </label>
 
-  <label>
-    Start date:
-    <input type="date" formControlName="startDateFilter">
-  </label>
+  <span class="campaign-date-period">
+    <label>
+      Start date:
+      <input type="date" formControlName="startDateFilter">
+    </label>
 
-  <label>
-    End date:
-    <input type="date" formControlName="endDateFilter">
-  </label>
+    <label>
+      End date:
+      <input type="date" formControlName="endDateFilter">
+    </label>
+  </span>
+
 </form>

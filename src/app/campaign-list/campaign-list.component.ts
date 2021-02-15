@@ -8,12 +8,12 @@ import {Campaign} from '../campaign';
   styleUrls: ['./campaign-list.component.css']
 })
 export class CampaignListComponent implements OnInit {
-
   campaignList: Campaign[];
+
   constructor(private campaignService: CampaignService) { }
 
   ngOnInit(): void {
-    this.campaignService.getFilteredCampaignList().subscribe(r => this.campaignList = r);
+    this.campaignService.getFilteredCampaignList().subscribe(result => this.campaignList = result);
   }
 
 }
