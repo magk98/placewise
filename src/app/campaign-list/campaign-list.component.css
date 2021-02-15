@@ -1,12 +1,12 @@
 @media (max-width: 768px) {
-  #campaign-id{
+  #campaign-id {
     display: none;
   }
-  .campaign-date-period{
+  .campaign-date-period {
     display: block;
   }
 }
 
-.campaign-list-item{
+.campaign-list-item {
   margin-bottom: 2%;
 }

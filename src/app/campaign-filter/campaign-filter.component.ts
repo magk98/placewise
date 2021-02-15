@@ -24,38 +24,38 @@ export class CampaignFilterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  observeFilter(): Observable<Campaign[]>{
+  observeFilter(): Observable<Campaign[]> {
     return this.campaignService.getCampaignList()
-      .pipe(
-        map(campaigns => this.filterCampaigns(campaigns)));
+      .pipe(map(campaigns => this.filterCampaigns(campaigns)));
   }
 
-  filterCampaigns(campaigns: Campaign[]): Campaign[]{
-    campaigns = this.filterCampaignNames(campaigns);
-    return this.filterCampaignDates(campaigns);
+  filterCampaigns(campaigns: Campaign[]): Campaign[] {
+    const campaignsFilteredByName = this.filterCampaignNames(campaigns);
+
+    return this.filterCampaignDates(campaignsFilteredByName);
   }
 
-  filterCampaignDates(campaigns: Campaign[]): Campaign[]{
-    if (this._areDatesValuesPresent()){
-      return campaigns.filter(campaign => this._compareDatesRange(campaign));
+  filterCampaignDates(campaigns: Campaign[]): Campaign[] {
+    if (this.areDatesValuesPresent()) {
+      return campaigns.filter(campaign => this.campaignInsideInterval(campaign));
     }
     return campaigns;
   }
 
-  filterCampaignNames(campaigns: Campaign[]): Campaign[]{
+  filterCampaignNames(campaigns: Campaign[]): Campaign[] {
     const nameFormValue = this.CampaignForm.get('nameFilter').value;
 
     return campaigns.filter(camp => camp.name.toLowerCase().includes(nameFormValue.toLowerCase()));
   }
 
-  private _areDatesValuesPresent(): boolean{
+  private areDatesValuesPresent(): boolean {
     const startDateFormValue = this.CampaignForm.get('startDateFilter').value;
     const endDateFormValue = this.CampaignForm.get('endDateFilter').value;
 
     return startDateFormValue !== '' && endDateFormValue !== '';
   }
 
-  private _compareDatesRange(campaign: Campaign): boolean{
+  private campaignInsideInterval(campaign: Campaign): boolean {
     const startDate = new Date(this.CampaignForm.get('startDateFilter').value);
     const endDate = new Date(this.CampaignForm.get('endDateFilter').value);
 
